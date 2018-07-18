@@ -10,7 +10,9 @@ const server = http.createServer(function(req, res){
   var parsedUrl = url.parse(req.url, true);
   var trimmedUrl = parsedUrl.pathname.replace(/^\/+|\/+$/g,'');
   var method = req.method;
+  var query = parsedUrl.query;
   console.log(trimmedUrl+" "+method);
+  console.log(query);
   // sending response
   res.end("responding to request!");
 });
