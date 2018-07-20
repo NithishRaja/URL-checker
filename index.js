@@ -48,6 +48,7 @@ const server = http.createServer(function(req, res){
       const payloadString = JSON.stringify(payload);
 
       // sending response with status code and payload
+      res.setHeader("Content-Type", "application/json");
       res.writeHead(statusCode);
       res.end(payloadString);
       // logging the response
