@@ -1,12 +1,16 @@
-// primary file for server
+/*
+ * primary file for server
+ *
+ */
 
 // dependencies
 const http = require("http");
 const url = require("url");
 const StringDecoder = require("string_decoder").StringDecoder;
+const config = require("./config");
 
-// creating server
-const server = http.createServer(function(req, res){
+// defining server logic
+const ServerLogic = function(req, res){
   // parsing url
   var parsedUrl = url.parse(req.url, true);
   // getting trimmed url
@@ -55,11 +59,16 @@ const server = http.createServer(function(req, res){
       console.log("response: ", statusCode, payloadString);
     });
   });
+}
+
+// creating server
+const httpServer = http.createServer(function(req, res){
+  ServerLogic(req, res);
 });
 
 // listen to port 8000
-server.listen(8000, function(){
-  console.log("server is listening to port 8000, press ctrl+c to exit");
+httpServer.listen(config.port, function(){
+  console.log("HTTP server is listening to port "+config.port+" in "+config.envName+" mode, press ctrl+c to exit");
 });
 
 // defining handler
