@@ -10,17 +10,6 @@ const StringDecoder = require("string_decoder").StringDecoder;
 const config = require("./config");
 const _data = require("./lib/data");
 
-// Code for testing data library
-// TODO: delete at end of testing
-_data.delete("indexx", "folder", function(err, payload){
-  if(!err && payload){
-    var payloadString = JSON.stringify(payload);
-    console.log(payload);
-  }else{
-    console.log(err);
-  }
-});
-
 // defining server logic
 const ServerLogic = function(req, res){
   // parsing url
