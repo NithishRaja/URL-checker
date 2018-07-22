@@ -12,7 +12,7 @@ const _data = require("./lib/data");
 
 // Code for testing data library
 // TODO: delete at end of testing
-_data.create("indexx", "folder",{message: "qzawsxedrcftvgbhnjmk"}, function(err, payload){
+_data.update("indexx", "folder",{message: "i am here!!!"}, function(err, payload){
   if(!err && payload){
     var payloadString = JSON.stringify(payload);
     console.log(payload);
