@@ -74,10 +74,10 @@ httpServer.listen(config.port, function(){
 // defining handler
 var handler = {};
 
-// sample handler for the route /sample
-handler.sample = function(data, callback){
-  callback(200, {'name': 'sample handler'});
-};
+// handler for the route /ping
+handler.ping = function(data, callback){
+  callback(200);
+}
 
 // not found handler for default
 handler.notFound = function(data, callback){
@@ -86,5 +86,5 @@ handler.notFound = function(data, callback){
 
 // defining router
 const router = {
-  'sample': handler.sample,
+  'ping': handler.ping,
 }
