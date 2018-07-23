@@ -8,6 +8,7 @@ const http = require("http");
 const url = require("url");
 const StringDecoder = require("string_decoder").StringDecoder;
 const config = require("./config");
+const router = require("./routes");
 
 // defining server logic
 const ServerLogic = function(req, res){
@@ -33,7 +34,7 @@ const ServerLogic = function(req, res){
     buffer+=decoder.end();
 
     // getting the route handler
-    var selectedHandler = typeof(router[trimmedUrl])!="undefined"?router[trimmedUrl]:handler.notFound;
+    var selectedHandler = typeof(router[trimmedUrl])!="undefined"?router[trimmedUrl]:router.notFound;
     // constructing data object to send to handler
     const data = {
       trimmedUrl: trimmedUrl,
@@ -70,21 +71,3 @@ const httpServer = http.createServer(function(req, res){
 httpServer.listen(config.port, function(){
   console.log("HTTP server is listening to port "+config.port+" in "+config.envName+" mode, press ctrl+c to exit");
 });
-
-// defining handler
-var handler = {};
-
-// handler for the route /ping
-handler.ping = function(data, callback){
-  callback(200);
-}
-
-// not found handler for default
-handler.notFound = function(data, callback){
-  callback(404);
-}
-
-// defining router
-const router = {
-  'ping': handler.ping,
-}
