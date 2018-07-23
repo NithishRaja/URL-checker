@@ -8,7 +8,6 @@ const http = require("http");
 const url = require("url");
 const StringDecoder = require("string_decoder").StringDecoder;
 const config = require("./config");
-const _data = require("./lib/data");
 
 // defining server logic
 const ServerLogic = function(req, res){
