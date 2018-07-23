@@ -3,19 +3,24 @@
  *
  */
 
+// Dependencies
+const path = require("path");
+
 // defining environments container
 var environments = {};
 
 // defining development environment
 environments.development = {
   port: 80,
-  envName: "development"
+  envName: "development",
+  dataDir: path.join(__dirname, "/.data/")
 };
 
 // defining production environment
 environments.production = {
   port: 443,
-  envName: "production"
+  envName: "production",
+  dataDir: path.join(__dirname, "/.data/")
 };
 
 // checking if NODE_ENV was set
