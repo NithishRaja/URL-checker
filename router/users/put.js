@@ -4,8 +4,8 @@
  */
 
 // Dependencies
-const _data = require("./../../../lib/data");
-const _helpers = require("./../../../lib/helpers");
+const _data = require("./../../lib/data");
+const _helpers = require("./../../lib/helpers");
 
 // Initializing put function
 const put = function(data, callback){

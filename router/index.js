@@ -1,18 +1,21 @@
 /*
- * File containing all routes
+ * Container file for handlers
  *
  */
 
 // dependencies
-const handler = require("./handler");
+const ping = require("./ping");
+const notFound = require("./notFound");
+const users = require("./users");
+const tokens = require("./tokens");
 
-// defining router
-const router = {
- "ping": handler.ping,
- "notFound": handler.notFound,
- "users": handler.users,
- "tokens": handler.tokens
-}
+// Initializing handler container
+const handler = {
+  ping: ping,
+  notFound: notFound,
+  users: users,
+  tokens: tokens
+};
 
-// Exporting router
-module.exports = router;
+// Exporting container
+module.exports = handler;

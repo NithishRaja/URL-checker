@@ -4,8 +4,8 @@
  */
 
 // Dependencies
-const _data = require("./../../../lib/data" );
-const _helpers = require("./../../../lib/helpers");
+const _data = require("./../../lib/data" );
+const _helpers = require("./../../lib/helpers");
 
 // Initializing post function
 const post = function(data, callback){

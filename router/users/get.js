@@ -4,7 +4,7 @@
  */
 
 // Dependencies
-const _data = require("./../../../lib/data");
+const _data = require("./../../lib/data");
 
 // Initializing get function
 const get = function(data, callback){

@@ -4,7 +4,7 @@
  */
 
 // Dependencies
-const _data = require("./../../../lib/data");
+const _data = require("./../../lib/data");
 
 // Initializing delete function
 const remove = function(data, callback){
