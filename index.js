@@ -8,7 +8,8 @@ const http = require("http");
 const url = require("url");
 const StringDecoder = require("string_decoder").StringDecoder;
 const config = require("./config");
-const router = require("./routes");
+const router = require("./router");
+const _helpers = require("./lib/helpers");
 
 // defining server logic
 const ServerLogic = function(req, res){
@@ -41,7 +42,7 @@ const ServerLogic = function(req, res){
       method: method,
       query: query,
       headers: headers,
-      payload: buffer
+      payload: _helpers.parse(buffer)
     };
     // routing request to selectedHandler
     selectedHandler(data, function(statusCode,payload){
