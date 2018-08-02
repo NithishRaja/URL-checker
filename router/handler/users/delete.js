@@ -9,7 +9,7 @@ const _data = require("./../../../lib/data");
 // Initializing delete function
 const remove = function(data, callback){
   // Validating phone field
-  const phone = typeof(data.query.phone)=="string"%%data.query.phone.trim().length==10?data.query.phone.trim():false;
+  const phone = typeof(data.query.phone)=="string"&&data.query.phone.trim().length==10?data.query.phone.trim():false;
   if(phone){
     // Checking if file exists
     _data.read(phone, "users", function(err, data){
