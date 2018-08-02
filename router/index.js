@@ -10,7 +10,8 @@ const handler = require("./handler");
 const router = {
  "ping": handler.ping,
  "notFound": handler.notFound,
- "users": handler.users
+ "users": handler.users,
+ "tokens": handler.tokens
 }
 
 // Exporting router

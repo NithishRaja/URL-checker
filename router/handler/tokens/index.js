@@ -10,7 +10,7 @@ const remove = require("./delete");
 const post = require("./post");
 
 // Initializing container object
-const methods = {
+const method = {
   get: get,
   put: put,
   post: post,
