@@ -9,7 +9,6 @@ const _helpers = require("./../../lib/helpers");
 
 // Initializing function
 const post = function(data, callback){
-  console.log(data.payload);
   const phone = typeof(data.payload.phone) =="string"&&data.payload.phone.trim().length==10?data.payload.phone.trim():false;
   const password = typeof(data.payload.password)=="string"&&data.payload.password.trim().length>0?data.payload.password.trim():false;
   // Checking if payload containes required data
@@ -33,6 +32,7 @@ const post = function(data, callback){
             if(!err){
               callback(200, tokenObject);
             }else{
+              console.log(err);
               callback(500, {"Error":"Unable to create token"});
             }
           });
@@ -40,6 +40,7 @@ const post = function(data, callback){
           callback(400, {"Error":"Password does not match"});
         }
       }else{
+        console.log(err);
         callback(400, {"Error":"User does not exist"});
       }
     });
