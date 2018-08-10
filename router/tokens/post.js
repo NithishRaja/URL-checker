@@ -19,7 +19,22 @@ const post = function(data, callback){
         const hashedPassword = _helpers.hash(password);
         // Checking if hashed password matches with existing password
         if(hashedPassword==dataObject.hashedPassword){
-          
+          // Creating token Id
+          const tokenId = _helpers.createRandomString(20);
+          // Creating token object
+          const tokenObject = {
+            "tokenId": tokenId,
+            "phone": phone,
+            "expires": Date.now()+1000*60*60
+          };
+          // Storing the token
+          _data.create(tokenId, "tokens", tokenObject, function(err){
+            if(!err){
+              callback(200, tokenObject);
+            }else{
+              callback(500, {"Error":"Unable to create token"});
+            }
+          });
         }else{
           callback(400, {"Error":"Password does not match"});
         }
