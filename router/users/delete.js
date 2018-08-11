@@ -5,26 +5,36 @@
 
 // Dependencies
 const _data = require("./../../lib/data");
+const _helpers = require("./../../lib/helpers");
 
 // Initializing delete function
 const remove = function(data, callback){
   // Validating phone field
   const phone = typeof(data.query.phone)=="string"&&data.query.phone.trim().length==10?data.query.phone.trim():false;
   if(phone){
-    // Checking if file exists
-    _data.read(phone, "users", function(err, data){
-      if(!err){
-        _data.delete(phone, "users", function(err){
+    // Getting token
+    const token = typeof(data.payload.token)=="string"&&data.payload.token.trim().length==20?data.payload.token.trim():false;
+    // Checking token validity
+    _helpers.verifyToken(token, phone, function(validity){
+      if(validity){
+        // Checking if file exists
+        _data.read(phone, "users", function(err, data){
           if(!err){
-            callback(200);
+            _data.delete(phone, "users", function(err){
+              if(!err){
+                callback(200);
+              }else{
+                console.log(err);
+                callback(500, {"Error":"Unable to delete file"});
+              }
+            });
           }else{
             console.log(err);
-            callback(500, {"Error":"Unable to delete file"});
+            callback(500, {"Error":"Unable to read from file"});
           }
         });
       }else{
-        console.log(err);
-        callback(500, {"Error":"Unable to read from file"});
+        callback(403, {"Error":"Token is not valid or token expired"});
       }
     });
   }else{
