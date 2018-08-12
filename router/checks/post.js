@@ -5,6 +5,7 @@
 
 // Dependencies
 const _data = require("./../../lib/data");
+const _helpers = require("./../../lib/helpers");
 
 // Initializing function
 const post = function(data, callback){
@@ -18,7 +19,53 @@ const post = function(data, callback){
   if(protocol&&method&&url&&successCodes&&timeout){
     // Getting token
     const token = typeof(data.headers.token)=="string"&&data.headers.token.trim().length==20?data.headers.token.trim():false;
-    callback(200);
+    // Getting token data
+    _data.read(token, "tokens", function(err, tokenData){
+      if(!err){
+        const userPhone = tokenData.phone;
+        // Getting user data
+        _data.read(userPhone, "users", function(err, userData){
+          if(!err){
+            // Validating user checks
+            const userChecks = typeof(userData.checks)=="object"&&userData.checks instanceof Array?userData.checks:[];
+            // creating check idea
+            const checkId = _helpers.createRandomString(20);
+            // Creating check object
+            const checkObject = {
+              checkId: checkId,
+              userPhone: userPhone,
+              protocol: protocol,
+              method: method,
+              url: url,
+              successCodes: successCodes,
+              timeout: timeout
+            };
+            // Writing the check object to file
+            _data.create(checkId, "checks", checkObject, function(err){
+              if(!err){
+                // Update checks array in userData
+                userChecks.push(checkId);
+                userData.checks = userChecks;
+                // Updating user data
+                _data.update(userPhone, "users", userData, function(err){
+                  if(!err){
+                    callback(200, checkObject);
+                  }else{
+                    callback(500, {"Error":"Unable to write user data to file"});
+                  }
+                });
+              }else{
+                callback(500, {"Error":"Unable to write checks to file"});
+              }
+            });
+          }else{
+            callback(500, {"Error":"Unable to read user data"});
+          }
+        });
+      }else{
+        callback(403, {"Error":"Token does not exist"});
+      }
+    });
   }else{
     callback(400, {"Error":"Missing required fields"});
   }
