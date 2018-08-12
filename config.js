@@ -14,7 +14,8 @@ environments.development = {
   port: 80,
   envName: "development",
   dataDir: path.join(__dirname, "/.data/"),
-  hashingSecret: "MyHashingSecret"
+  hashingSecret: "MyHashingSecret",
+  maxChecks: 5
 };
 
 // defining production environment
@@ -22,7 +23,8 @@ environments.production = {
   port: 443,
   envName: "production",
   dataDir: path.join(__dirname, "/.data/"),
-  hashingSecret: "MyProductionHashingSecret"
+  hashingSecret: "MyProductionHashingSecret",
+  maxChecks: 5
 };
 
 // checking if NODE_ENV was set
