@@ -15,7 +15,7 @@ const put = function(data, callback){
     // Getting user token
     const token = typeof(data.headers.token)=="string"&&data.headers.token.trim().length==20?data.headers.token.trim():false;
     // Checking valiity of token
-    _helpers.verifyToken(token, phone, function)(validity){
+    _helpers.verifyToken(token, phone, function(validity){
       if(validity){
         // Checking optional details
         const firstName = typeof(data.payload.firstName)=="string"&&data.payload.firstName.trim().length>0?data.payload.firstName.trim():false;
