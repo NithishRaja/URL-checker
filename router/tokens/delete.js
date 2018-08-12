@@ -8,7 +8,9 @@ const _data = require("./../../lib/data");
 
 // Initializing function
 const remove = function(data, callback){
+  // Getting token id from query
   const tokenId = typeof(data.query.tokenId)=="string"&&data.query.tokenId.trim().length==20?data.query.tokenId.trim():false;
+  // Validating token id
   if(tokenId){
     _data.read(tokenId, "tokens", function(err, tokenData){
       if(!err){
