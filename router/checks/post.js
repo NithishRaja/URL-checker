@@ -6,6 +6,7 @@
 // Dependencies
 const _data = require("./../../lib/data");
 const _helpers = require("./../../lib/helpers");
+const config = require("./../../config");
 
 // Initializing function
 const post = function(data, callback){
@@ -28,36 +29,40 @@ const post = function(data, callback){
           if(!err){
             // Validating user checks
             const userChecks = typeof(userData.checks)=="object"&&userData.checks instanceof Array?userData.checks:[];
-            // creating check idea
-            const checkId = _helpers.createRandomString(20);
-            // Creating check object
-            const checkObject = {
-              checkId: checkId,
-              userPhone: userPhone,
-              protocol: protocol,
-              method: method,
-              url: url,
-              successCodes: successCodes,
-              timeout: timeout
-            };
-            // Writing the check object to file
-            _data.create(checkId, "checks", checkObject, function(err){
-              if(!err){
-                // Update checks array in userData
-                userChecks.push(checkId);
-                userData.checks = userChecks;
-                // Updating user data
-                _data.update(userPhone, "users", userData, function(err){
-                  if(!err){
-                    callback(200, checkObject);
-                  }else{
-                    callback(500, {"Error":"Unable to write user data to file"});
-                  }
-                });
-              }else{
-                callback(500, {"Error":"Unable to write checks to file"});
-              }
-            });
+            if(userChecks.length<=config.maxChecks){
+              // creating check idea
+              const checkId = _helpers.createRandomString(20);
+              // Creating check object
+              const checkObject = {
+                checkId: checkId,
+                userPhone: userPhone,
+                protocol: protocol,
+                method: method,
+                url: url,
+                successCodes: successCodes,
+                timeout: timeout
+              };
+              // Writing the check object to file
+              _data.create(checkId, "checks", checkObject, function(err){
+                if(!err){
+                  // Update checks array in userData
+                  userChecks.push(checkId);
+                  userData.checks = userChecks;
+                  // Updating user data
+                  _data.update(userPhone, "users", userData, function(err){
+                    if(!err){
+                      callback(200, checkObject);
+                    }else{
+                      callback(500, {"Error":"Unable to write user data to file"});
+                    }
+                  });
+                }else{
+                  callback(500, {"Error":"Unable to write checks to file"});
+                }
+              });
+            }else{
+              callback(400, {"Error":"Cannot create more than allowed number of ckecks ("+config.maxChecks+")"});
+            }
           }else{
             callback(500, {"Error":"Unable to read user data"});
           }
