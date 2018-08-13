@@ -19,7 +19,7 @@ const put = function(data, callback){
         // Getting token from header
         const tokenId = typeof(data.headers.token)=="string"&&data.headers.token.trim().length==20?data.headers.token.trim():false;
         // Validating token
-        _helpers.verifyToken(tokenId, checkData.phone, function(validity){
+        _helpers.verifyToken(tokenId, checkData.userPhone, function(validity){
           if(validity){
             // Getting fields to update
             const protocol = typeof(data.payload.protocol)=="string"&&["http","https"].indexOf(data.payload.protocol.trim())>-1?data.payload.protocol.trim():false;
