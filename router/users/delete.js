@@ -20,24 +20,24 @@ const remove = function(data, callback){
         // Checking if file exists
         _data.read(phone, "users", function(err, data){
           if(!err){
-            // Deleting user checks
-            data.checks.forEach(function(checkId){
-              // Deleting check
-              _data.delete(checkId, "checks", function(err){
-                if(!err){
-                  // Delete user file
-                  _data.delete(phone, "users", function(err){
+            // Delete user file
+            _data.delete(phone, "users", function(err){
+              if(!err){
+                // Deleting user checks
+                data.checks.forEach(function(checkId){
+                  // Deleting check
+                  _data.delete(checkId, "checks", function(err){
                     if(!err){
                       callback(200);
                     }else{
-                      console.log(err);
-                      callback(500, {"Error":"Unable to delete file"});
+                      callback(500, {"Error":"Unable to delete checks associated with user"});
                     }
                   });
-                }else{
-                  callback(500, {"Error":"Unable to delete checks associated with user"});
-                }
-              });
+                });
+              }else{
+                console.log(err);
+                callback(500, {"Error":"Unable to delete file"});
+              }
             });
           }else{
             console.log(err);
