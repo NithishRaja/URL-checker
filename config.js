@@ -15,7 +15,12 @@ environments.development = {
   envName: "development",
   dataDir: path.join(__dirname, "/.data/"),
   hashingSecret: "MyHashingSecret",
-  maxChecks: 5
+  maxChecks: 5,
+  'twilio' : {
+    'accountSid' : 'ACb32d411ad7fe886aac54c665d25e5c5d',
+    'authToken' : '9455e3eb3109edc12e3d8c92768f7a67',
+    'fromPhone' : '+15005550006'
+  }
 };
 
 // defining production environment
@@ -24,7 +29,12 @@ environments.production = {
   envName: "production",
   dataDir: path.join(__dirname, "/.data/"),
   hashingSecret: "MyProductionHashingSecret",
-  maxChecks: 5
+  maxChecks: 5,
+  'twilio' : {
+    'accountSid' : '',
+    'authToken' : '',
+    'fromPhone' : ''
+  }
 };
 
 // checking if NODE_ENV was set
