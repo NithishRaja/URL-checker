@@ -14,6 +14,7 @@ environments.development = {
   port: 80,
   envName: "development",
   dataDir: path.join(__dirname, "/.data/"),
+  logDir: path.join(__dirname, "/.logs/"),
   hashingSecret: "MyHashingSecret",
   maxChecks: 5,
   'twilio' : {
@@ -28,6 +29,7 @@ environments.production = {
   port: 443,
   envName: "production",
   dataDir: path.join(__dirname, "/.data/"),
+  logDir: path.join(__dirname, "/.logs/"),
   hashingSecret: "MyProductionHashingSecret",
   maxChecks: 5,
   'twilio' : {
