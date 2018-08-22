@@ -5,7 +5,7 @@
 
 // Dependencies
 const server = require("./lib/server");
-const worker = require("./lib/workers");
+const workers = require("./lib/workers");
 
 // Declaring app
 var app = {};
