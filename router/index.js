@@ -6,17 +6,17 @@
 // dependencies
 const ping = require("./ping");
 const notFound = require("./notFound");
-const users = require("./users");
-const tokens = require("./tokens");
-const checks = require("./checks");
+const api = require("./api");
+const home = require("./home");
 
 // Initializing handler container
 const handler = {
+  "": home,
   "ping": ping,
   "notFound": notFound,
-  "api/users": users,
-  "api/tokens": tokens,
-  "api/checks": checks
+  "api/users": api.users,
+  "api/tokens": api.tokens,
+  "api/checks": api.checks
 };
 
 // Exporting container
