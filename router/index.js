@@ -12,11 +12,11 @@ const checks = require("./checks");
 
 // Initializing handler container
 const handler = {
-  ping: ping,
-  notFound: notFound,
-  users: users,
-  tokens: tokens,
-  checks: checks
+  "ping": ping,
+  "notFound": notFound,
+  "api/users": users,
+  "api/tokens": tokens,
+  "api/checks": checks
 };
 
 // Exporting container
