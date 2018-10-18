@@ -15,6 +15,7 @@ environments.development = {
   envName: "development",
   dataDir: path.join(__dirname, "/.data/"),
   logDir: path.join(__dirname, "/.logs/"),
+  templateDir: path.join(__dirname, "/.templates/"),
   hashingSecret: "MyHashingSecret",
   maxChecks: 5,
   'twilio' : {
@@ -30,6 +31,7 @@ environments.production = {
   envName: "production",
   dataDir: path.join(__dirname, "/.data/"),
   logDir: path.join(__dirname, "/.logs/"),
+  templateDir: path.join(__dirname, "/.templates/"),
   hashingSecret: "MyProductionHashingSecret",
   maxChecks: 5,
   'twilio' : {
