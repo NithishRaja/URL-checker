@@ -13,7 +13,7 @@ const home = function(data, callback){
   // Responding with html only if method is GET
   if(data.method=="GET"){
     // Getting template
-    _helpers.getTemplate("home", function(err, template){
+    _helpers.getTemplate("home", {}, function(err, template){
       if(!err){
         callback(200, template, "html");
       }else{
