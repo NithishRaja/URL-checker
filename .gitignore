@@ -3,3 +3,6 @@
 
 # log directory
 .logs
+
+# ignore the zip file
+*.zip
